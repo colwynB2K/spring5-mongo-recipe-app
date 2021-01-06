@@ -2,6 +2,8 @@ package guru.springframework.spring5recipeapp.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 import java.math.BigDecimal;
 
@@ -9,11 +11,14 @@ import java.math.BigDecimal;
 @Setter
 public class Ingredient {
 
+    @Id
     private String id;
     private BigDecimal amount;
     private String name;
+
+    @DBRef
     private UnitOfMeasure unitOfMeasure;
-    private Recipe recipe;
+    //private Recipe recipe;                // Commented out this bidirectional reference
 
     public Ingredient() {
     }
