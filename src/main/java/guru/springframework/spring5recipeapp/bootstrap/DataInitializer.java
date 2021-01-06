@@ -26,27 +26,24 @@ import java.util.List;
 @Component
 @Slf4j
 @Profile("default")
-public class H2DataInitializer implements ApplicationListener<ContextRefreshedEvent> {
+public class DataInitializer implements ApplicationListener<ContextRefreshedEvent> {
 
     private final CategoryRepository categoryRepository;
     private final RecipeRepository recipeRepository;
     private final UnitOfMeasureRepository unitOfMeasureRepository;
     private final CategoryService categoryService;
-    private final RecipeService recipeService;
     private final UnitOfMeasureService unitOfMeasureService;
 
     @Autowired
-    public H2DataInitializer(CategoryRepository categoryRepository,
-                             RecipeRepository recipeRepository,
-                             UnitOfMeasureRepository unitOfMeasureRepository,
-                             CategoryService categoryService,
-                             RecipeService recipeService,
-                             UnitOfMeasureService unitOfMeasureService) {
+    public DataInitializer(CategoryRepository categoryRepository,
+                           RecipeRepository recipeRepository,
+                           UnitOfMeasureRepository unitOfMeasureRepository,
+                           CategoryService categoryService,
+                           UnitOfMeasureService unitOfMeasureService) {
         this.categoryRepository = categoryRepository;
         this.recipeRepository = recipeRepository;
         this.unitOfMeasureRepository = unitOfMeasureRepository;
         this.categoryService = categoryService;
-        this.recipeService = recipeService;
         this.unitOfMeasureService = unitOfMeasureService;
     }
 
@@ -54,7 +51,88 @@ public class H2DataInitializer implements ApplicationListener<ContextRefreshedEv
     @Transactional
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         log.info("Loading Bootstrap Data...");
+        loadCategories();
+        loadUom();
         recipeRepository.saveAll(getRecipes());
+    }
+
+    private void loadCategories(){
+        Category cat1 = new Category();
+        cat1.setName("American");
+        categoryRepository.save(cat1);
+
+        Category cat2 = new Category();
+        cat2.setName("Fast Food");
+        categoryRepository.save(cat2);
+
+        Category cat3 = new Category();
+        cat3.setName("Good Belgian Cooking");
+        categoryRepository.save(cat3);
+
+        Category cat4 = new Category();
+        cat4.setName("Fast Italian");
+        categoryRepository.save(cat4);
+
+        Category cat5 = new Category();
+        cat5.setName("Mexican");
+        categoryRepository.save(cat5);
+    }
+
+    private void loadUom(){
+        UnitOfMeasure uom1 = new UnitOfMeasure();
+        uom1.setName("Cup");
+        uom1.setUnit("Cup");
+        unitOfMeasureRepository.save(uom1);
+
+        UnitOfMeasure uom2 = new UnitOfMeasure();
+        uom2.setName("Dash");
+        uom2.setUnit("Dash");
+        unitOfMeasureRepository.save(uom2);
+
+        UnitOfMeasure uom3 = new UnitOfMeasure();
+        uom3.setName("Drop");
+        uom3.setUnit("Drop");
+        unitOfMeasureRepository.save(uom3);
+
+        UnitOfMeasure uom4 = new UnitOfMeasure();
+        uom4.setName("Gram");
+        uom4.setUnit("g");
+        unitOfMeasureRepository.save(uom4);
+
+        UnitOfMeasure uom5 = new UnitOfMeasure();
+        uom5.setName("Kilogram");
+        uom5.setUnit("kg");
+        unitOfMeasureRepository.save(uom5);
+
+        UnitOfMeasure uom6 = new UnitOfMeasure();
+        uom6.setName("Milliliter");
+        uom6.setUnit("ml");
+        unitOfMeasureRepository.save(uom6);
+
+        UnitOfMeasure uom7 = new UnitOfMeasure();
+        uom7.setName("Liter");
+        uom7.setUnit("l");
+        unitOfMeasureRepository.save(uom7);
+
+        UnitOfMeasure uom8 = new UnitOfMeasure();
+        uom8.setName("Ounce");
+        uom8.setUnit("oz");
+        unitOfMeasureRepository.save(uom8);
+
+        UnitOfMeasure uom9 = new UnitOfMeasure();
+        uom9.setName("Pinch");
+        uom9.setUnit("Pinch");
+        unitOfMeasureRepository.save(uom9);
+
+        UnitOfMeasure uom10 = new UnitOfMeasure();
+        uom10.setName("Tablespoon");
+        uom10.setUnit("Tablespoon");
+        unitOfMeasureRepository.save(uom10);
+
+        UnitOfMeasure uom11 = new UnitOfMeasure();
+        uom11.setName("Teaspoon");
+        uom11.setUnit("Teaspoon");
+        unitOfMeasureRepository.save(uom11);
     }
 
     private List<Recipe> getRecipes() {
