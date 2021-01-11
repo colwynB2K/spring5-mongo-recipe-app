@@ -22,9 +22,8 @@ public interface RecipeMapper {
     RecipeDTO toDTOIgnoreChildObjects(Recipe recipe);
 
     @Mappings({
-            @Mapping(target = "categories", qualifiedByName = "CategorySetIgnoreRecipes"),
-            @Mapping(target = "ingredients", qualifiedByName = "IngredientSetIgnoreRecipeChildObjects"),
-            @Mapping(target = "notes.recipe", ignore = true)
+            @Mapping(target = "categories", qualifiedByName = "CategoryListIgnoreRecipes"),
+            @Mapping(target = "ingredients", qualifiedByName = "IngredientListIgnoreRecipeChildObjects"),
     })
     RecipeDTO toDTO(Recipe recipe);
 
@@ -41,9 +40,8 @@ public interface RecipeMapper {
     Recipe toEntityIgnoreChildObjects(RecipeDTO recipeDTO);
 
     @Mappings({
-            @Mapping(target = "categories", qualifiedByName = "CategorySetIgnoreRecipes"),
-            @Mapping(target = "ingredients", qualifiedByName = "IngredientSetIgnoreRecipeChildObjects"),
-            @Mapping(target = "notes.recipe", ignore = true)
+            @Mapping(target = "categories", qualifiedByName = "CategoryListIgnoreRecipes"),
+            @Mapping(target = "ingredients", qualifiedByName = "IngredientListIgnoreRecipeChildObjects"),
     })
     Recipe toEntity(RecipeDTO recipeDTO);
 

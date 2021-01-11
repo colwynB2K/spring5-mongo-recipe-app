@@ -10,7 +10,9 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Getter
@@ -45,7 +47,7 @@ public class RecipeDTO {
     private String url;
 
     private String yield;
-    private Set<CategoryDTO> categories = new HashSet<>();
-    private Set<IngredientDTO> ingredients = new HashSet<>();
+    private List<CategoryDTO> categories = new ArrayList<>();
+    private List<IngredientDTO> ingredients = new ArrayList<>();
     private NotesDTO notes;
 }

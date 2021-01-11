@@ -188,6 +188,17 @@
                                     <ul th:each="ingredient: ${recipe.ingredients}">
                                         <li th:text="${ingredient.amount != null ? ingredient.amount : ''} + ${ingredient.unitOfMeasure != null ? ' ' + ingredient.unitOfMeasure.unit + ' of' : ''} + ' ' + ${ingredient.name}">1 Cup of milk</li>
                                     </ul>
+                                    <!--/* Thymeleaf tag on the field using *, will give us an array that Spring will bind (the DTO objects) to.*/-->
+                                    <div th:each="ingredient, idx: ${recipe.ingredients}">
+                                        <input type="hidden" th:field="*{ingredients[__${idx.index}__].id}" />
+                                        <input type="hidden" th:field="*{ingredients[__${idx.index}__].name}" />
+                                        <input type="hidden" th:field="*{ingredients[__${idx.index}__].amount}" />
+                                        <input type="hidden" th:field="*{ingredients[__${idx.index}__].unitOfMeasure.id}" />
+                                    </div>
+                                    <div th:each="category, idx: ${recipe.categories}">
+                                        <input type="hidden" th:field="*{categories[__${idx.index}__].id}" />
+                                        <input type="hidden" th:field="*{categories[__${idx.index}__].name}" />
+                                    </div>
                                 </div>
                             </div>
                             <!--/*

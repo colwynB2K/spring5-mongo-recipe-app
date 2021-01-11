@@ -6,7 +6,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -30,8 +32,8 @@ public class Recipe {
     private String yield;
 
     @DBRef
-    private Set<Category> categories = new HashSet<>();
-    private Set<Ingredient> ingredients = new HashSet<>();
+    private List<Category> categories = new ArrayList<>();
+    private List<Ingredient> ingredients = new ArrayList<>();
     private Notes notes;
 
     public Recipe addCategory(Category category) {
@@ -48,7 +50,7 @@ public class Recipe {
         return this;
     }
 
-    public Recipe addIngredients(Set<Ingredient> ingredients) {
+    public Recipe addIngredients(List<Ingredient> ingredients) {
         //ingredients.stream().forEach(ingredient -> ingredient.setRecipe(this));       // Commented out this bidirectional reference
         this.setIngredients(ingredients);
 

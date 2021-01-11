@@ -4,6 +4,7 @@ import guru.springframework.spring5recipeapp.domain.Ingredient;
 import guru.springframework.spring5recipeapp.dto.IngredientDTO;
 import org.mapstruct.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Mapper(componentModel = "spring", uses = {RecipeMapper.class})
@@ -19,9 +20,9 @@ public interface IngredientMapper {
     })
     IngredientDTO toDTOIgnoreRecipeChildObjects(Ingredient ingredient);
 
-    @Named("IngredientSetIgnoreRecipeChildObjects")
+    @Named("IngredientListIgnoreRecipeChildObjects")
     @IterableMapping(qualifiedByName = "IngredientIgnoreRecipeChildObjects")
-    Set<IngredientDTO> toDTOSetIgnoreRecipeChildObjects(Set<Ingredient> ingredients);
+    List<IngredientDTO> toDTOSetIgnoreRecipeChildObjects(List<Ingredient> ingredients);
 
     @Named("IngredientIgnoreRecipeChildObjects")
     @Mappings({
@@ -31,7 +32,7 @@ public interface IngredientMapper {
     })
     Ingredient toEntityIgnoreRecipeChildObjects(IngredientDTO ingredientDTO);
 
-    @Named("IngredientSetIgnoreRecipeChildObjects")
+    @Named("IngredientListIgnoreRecipeChildObjects")
     @IterableMapping(qualifiedByName = "IngredientIgnoreRecipeChildObjects")
-    Set<Ingredient> toEntitySetIgnoreRecipeChildObjects(Set<IngredientDTO> ingredientDTOs);
+    List<Ingredient> toEntitySetIgnoreRecipeChildObjects(List<IngredientDTO> ingredientDTOs);
 }

@@ -4,6 +4,7 @@ import guru.springframework.spring5recipeapp.domain.Category;
 import guru.springframework.spring5recipeapp.dto.CategoryDTO;
 import org.mapstruct.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Mapper(componentModel = "spring", uses = {RecipeMapper.class})
@@ -18,9 +19,9 @@ public interface CategoryMapper {
     @Mapping(target = "recipes", ignore = true)
     CategoryDTO toDTOIgnoreRecipes(Category category);
 
-    @Named("CategorySetIgnoreRecipes")
+    @Named("CategoryListIgnoreRecipes")
     @IterableMapping(qualifiedByName = "CategoryIgnoreRecipes")
-    Set<CategoryDTO> toDTOSetIgnoreRecipes(Set<Category> categories);
+    List<CategoryDTO> toDTOListIgnoreRecipes(List<Category> categories);
 
     @Mappings({
             @Mapping(target = "recipes", qualifiedByName = "RecipeSetIgnoreChildObjects")
@@ -31,8 +32,8 @@ public interface CategoryMapper {
     @Mapping(target = "recipes", ignore = true)
     Category toEntityIgnoreRecipes(CategoryDTO categoryDTO);
 
-    @Named("CategorySetIgnoreRecipes")
+    @Named("CategoryListIgnoreRecipes")
     @IterableMapping(qualifiedByName = "CategoryIgnoreRecipes")
-    Set<Category> toEntitySetIgnoreRecipes(Set<CategoryDTO> categoryDTOs);
+    List<Category> toEntityListIgnoreRecipes(List<CategoryDTO> categoryDTOs);
 
 }

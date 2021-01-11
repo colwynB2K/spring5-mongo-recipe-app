@@ -2,14 +2,17 @@ package guru.springframework.spring5recipeapp.domain;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.springframework.data.annotation.Id;
+
+import java.util.UUID;
 
 @Data
-@EqualsAndHashCode(exclude = "recipe")
 public class Notes {
 
-    private String id;
+    @Id
+    private String id = UUID.randomUUID().toString();
     private String notes;
-    private Recipe recipe;
+    //private Recipe recipe;        // Remove bi-directional relationship
 
     @Override
     public String toString() {
