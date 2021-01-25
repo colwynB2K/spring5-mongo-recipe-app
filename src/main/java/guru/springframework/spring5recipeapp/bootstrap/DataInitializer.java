@@ -31,20 +31,14 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
     private final CategoryRepository categoryRepository;
     private final RecipeRepository recipeRepository;
     private final UnitOfMeasureRepository unitOfMeasureRepository;
-    private final CategoryService categoryService;
-    private final UnitOfMeasureService unitOfMeasureService;
 
     @Autowired
     public DataInitializer(CategoryRepository categoryRepository,
                            RecipeRepository recipeRepository,
-                           UnitOfMeasureRepository unitOfMeasureRepository,
-                           CategoryService categoryService,
-                           UnitOfMeasureService unitOfMeasureService) {
+                           UnitOfMeasureRepository unitOfMeasureRepository) {
         this.categoryRepository = categoryRepository;
         this.recipeRepository = recipeRepository;
         this.unitOfMeasureRepository = unitOfMeasureRepository;
-        this.categoryService = categoryService;
-        this.unitOfMeasureService = unitOfMeasureService;
     }
 
     @Override
@@ -275,21 +269,11 @@ public class DataInitializer implements ApplicationListener<ContextRefreshedEven
     }
 
     private UnitOfMeasure getUnitOfMeasureByName(String name) {
-        UnitOfMeasureDTO uomDTO = unitOfMeasureService.getUOMByName(name);
-
-        UnitOfMeasure uom = new UnitOfMeasure();
-        BeanUtils.copyProperties(uomDTO, uom);
-
-        return uom;
+        return unitOfMeasureRepository.findByUnit(name).get();
     }
 
     private Category getCategoryByName(String name) {
-        CategoryDTO categoryDTO = categoryService.getCategoryByName(name);
-
-        Category category = new Category();
-        BeanUtils.copyProperties(categoryDTO, category);
-
-        return category;
+        return categoryRepository.findByName(name).get();
     }
 
 
